@@ -4,7 +4,7 @@ endif
 export
 
 run:
-	go run -mod=mod cmd/main.go -source ./data/sourceData -target ./data/targetData --delete-missing
+	go run -mod=mod cmd/main.go -source ./data/sourceData -target ./data/targetData --delete-missing --deep-search
 
 run-no-delete:
 	go run -mod=mod cmd/main.go -source ./data/sourceData -target ./data/targetData

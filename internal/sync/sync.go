@@ -10,8 +10,8 @@ import (
 )
 
 // SynchronizationDirectories synchronizes files from source to target directory.
-func SynchronizationDirectories(ctx context.Context, source, target string, deleteMissing *bool) error {
-	results, errs := pkgDir.CompareDirs(source, target, *deleteMissing)
+func SynchronizationDirectories(ctx context.Context, source, target string, deleteMissing, deepSearch bool) error {
+	results, errs := pkgDir.CompareDirs(source, target, deleteMissing, deepSearch)
 	if len(errs) > 0 {
 		for _, e := range errs {
 			log.Printf("Error: %v\n", e)
@@ -22,7 +22,7 @@ func SynchronizationDirectories(ctx context.Context, source, target string, dele
 	}
 
 	for _, file := range results.New {
-		err := pkgFile.CopyFile(ctx, filepath.Join(source, file), filepath.Join(target, file))
+		err := pkgFile.CopyFile(ctx, source, file, target, file)
 		if err != nil {
 			log.Printf("Failed to copy new file %s: %v\n", file, err)
 			continue
@@ -31,7 +31,7 @@ func SynchronizationDirectories(ctx context.Context, source, target string, dele
 	}
 
 	for _, file := range results.Updated {
-		err := pkgFile.CopyFile(ctx, filepath.Join(source, file), filepath.Join(target, file))
+		err := pkgFile.CopyFile(ctx, source, file, target, file)
 		if err != nil {
 			log.Printf("Failed to update file %s: %v\n", file, err)
 			continue
