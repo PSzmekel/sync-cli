@@ -126,7 +126,10 @@ func listFilesDeep(source, target string) (map[string]os.FileInfo, map[string]os
 	targetFileMap := make(map[string]os.FileInfo)
 
 	// walk source directory to get all file paths
-	err := filepath.WalkDir(source, func(path string, d fs.DirEntry, _ error) error {
+	err := filepath.WalkDir(source, func(path string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
 		if !d.IsDir() {
 			srcFilesPath = append(srcFilesPath, path)
 		}
@@ -146,7 +149,10 @@ func listFilesDeep(source, target string) (map[string]os.FileInfo, map[string]os
 	}
 
 	// walk target directory to compare files
-	err = filepath.WalkDir(target, func(path string, d fs.DirEntry, _ error) error {
+	err = filepath.WalkDir(target, func(path string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
 		if !d.IsDir() {
 			tgtFilesPath = append(tgtFilesPath, path)
 		}
