@@ -4,7 +4,10 @@ endif
 export
 
 run:
-	go run -mod=mod cmd/main.go ./sourceData ./targetData
+	go run -mod=mod cmd/main.go -source ./data/sourceData -target ./data/targetData --delete-missing
+
+run-no-delete:
+	go run -mod=mod cmd/main.go -source ./data/sourceData -target ./data/targetData
 
 test:
 	go test $$(go list ./...)
