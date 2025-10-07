@@ -34,8 +34,11 @@ Flags
 Or use make (no binary needed)
 
 ```bash
-# Create sample trees with nested paths and deterministic mtimes
+# Create or recreate sample trees with nested paths and deterministic mtimes
 make manual-setup
+
+# Clean up test dir
+make manual-clean
 
 # Show test data tree
 make manual-tree
@@ -51,9 +54,6 @@ make run-no-delete-deep
 
 # Shallow sync without delete missing files
 make run-no-delete-shallow
-
-# Clean up test dir
-make manual-clean
 
 # Run tests
 make test
