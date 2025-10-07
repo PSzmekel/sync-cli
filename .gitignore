@@ -3,3 +3,5 @@
 .vscode
 .DS_store
 data/*
+testdata/*
+sync-cli

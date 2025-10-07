@@ -10,7 +10,11 @@ import (
 )
 
 // SynchronizationDirectories synchronizes files from source to target directory.
-func SynchronizationDirectories(ctx context.Context, source, target string, deleteMissing, deepSearch bool) error {
+func SynchronizationDirectories(
+	ctx context.Context,
+	source, target string,
+	deleteMissing, deepSearch bool,
+) error {
 	results, errs := pkgDir.CompareDirs(source, target, deleteMissing, deepSearch)
 	if len(errs) > 0 {
 		for _, e := range errs {

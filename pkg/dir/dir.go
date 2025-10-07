@@ -40,7 +40,7 @@ func CompareDirs(
 			return diffResult, errors
 		}
 	} else {
-		sourceFileMap, targetFileMap, errs = listFiles(source, target)
+		sourceFileMap, targetFileMap, errs = listFilesShallow(source, target)
 		if len(errs) > 0 {
 			errors = append(errors, errs...)
 			return diffResult, errors
@@ -75,7 +75,7 @@ func CompareDirs(
 	return diffResult, nil
 }
 
-func listFiles(source, target string) (map[string]os.FileInfo, map[string]os.FileInfo, []error) {
+func listFilesShallow(source, target string) (map[string]os.FileInfo, map[string]os.FileInfo, []error) {
 	errors := []error{}
 	// read directories and create maps of file names to os.DirEntrys
 	sourceFiles, err := os.ReadDir(source)
