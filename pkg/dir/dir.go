@@ -25,9 +25,9 @@ func CompareDirs(
 	deleteMissing bool,
 	deepSearch bool,
 ) (DiffResult, []error) {
-	errors := []error{}
-	diffResult := DiffResult{}
 	var (
+		errors        []error
+		diffResult    DiffResult
 		sourceFileMap map[string]os.FileInfo
 		targetFileMap map[string]os.FileInfo
 		errs          []error
